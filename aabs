@@ -28,7 +28,7 @@ if [ "${AABS_IS_DEV_MACHINE}" != "true" ]; then
 		exit 1
 	fi
 
-	git -C "$AABS_PATH" pull https://github.com/TeamNexus/aabs master >> ${LOGFILE} 2>&1
+	git -C "$AABS_PATH" pull https://github.com/enesuzun2002/aabs master >> ${LOGFILE} 2>&1
 	if [ $? -ne 0 ]; then
 		echo -e "\r[ \033[0;31mFAIL\033[0m ] Updating AABS.. Failed! (Please check ${LOGFILE})"
 		exit 1
