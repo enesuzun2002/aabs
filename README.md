@@ -24,7 +24,7 @@ Getting started
 Download AABS from the latest sources, copy the configuration
 and set correct permissions for the main executable.
 
-	git clone https://github.com/TeamNexus/aabs ./aabs/
+	git clone https://github.com/enesuzun2002/aabs ./aabs/
 	cp ./aabs/aabs.config.php ./aabs.config.php
 	chmod +x ./aabs/aabs
 
