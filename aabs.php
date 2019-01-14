@@ -31,6 +31,7 @@ include_once AABS_BASEDIR . "/core/utils.php";
 require AABS_BASEDIR . "/lib/phpseclib.inc.php";
 
 // include remote-plugins
+include_once AABS_BASEDIR . "/remote/drive.php";
 include_once AABS_BASEDIR . "/remote/ftp.php";
 include_once AABS_BASEDIR . "/remote/local.php";
 include_once AABS_BASEDIR . "/remote/mega.php";

@@ -93,16 +93,16 @@ if (!defined('AABS_UPLOAD'))
 	define('AABS_UPLOAD', true);
 
 /*
- * Type of upload-method ("ftp", "sftp" or "mega")
+ * Type of upload-method ("ftp", "sftp", "mega" or "drive")
  * @default ftp
  */
 if (!defined('AABS_UPLOAD_TYPE'))
-	define('AABS_UPLOAD_TYPE', "ftp");
+	define('AABS_UPLOAD_TYPE', "drive");
 
 /*
  * Hostname or IP of the upload-server
  *
- * Not required for: local, mega
+ * Not required for: local, mega, drive
  *
  * @default "server.exmaple.com"
  */
@@ -112,7 +112,7 @@ if (!defined('AABS_UPLOAD_HOST'))
 /*
  * Port of the upload-server.
  *
- * Not required for: local, mega
+ * Not required for: local, mega, drive
  *
  * @default 22
  */
@@ -122,7 +122,7 @@ if (!defined('AABS_UPLOAD_PORT'))
 /*
  * Username used to login to the upload-server
  *
- * Not required for: local
+ * Not required for: local, drive
  *
  * ftp:  Username of the account
  * sftp: -||-
@@ -136,7 +136,7 @@ if (!defined('AABS_UPLOAD_USER'))
 /*
  * Password used to login to the upload-server
  *
- * Not required for: local
+ * Not required for: local, drive
  *
  * ftp:  Password of the account
  * sftp: -||-
@@ -153,6 +153,9 @@ if (!defined('AABS_UPLOAD_PASS'))
  */
 if (!defined('AABS_UPLOAD_DIR'))
 	define('AABS_UPLOAD_DIR', "/var/www/https/build/{SHORT_DEVICE}/%Y-%m-%d_%H%i");
+
+if (!defined('AABS_Date'))
+    define('AABS_DATE', "%Y-%m-%d_%H%i");
 
 /*
  * New name of the uploaded build

@@ -66,6 +66,7 @@ function aabs_upload($rom, $short_device, $device, $file_match, $type, $override
 			$var_type = $overrides['type'];
 
 		$upload_dir = do_path_variables($var_rom, $var_device, $var_short_device, $var_type, AABS_UPLOAD_DIR, $build_prop);
+        $folder_date = do_path_variables($var_rom, $var_device, $var_short_device, $var_type, AABS_DATE, $build_prop);
 		$upload_file = do_path_variables($var_rom, $var_device, $var_short_device, $var_type, AABS_UPLOAD_FILE, $build_prop);
 	}
 
@@ -132,8 +133,14 @@ function aabs_upload($rom, $short_device, $device, $file_match, $type, $override
 			$fn = "upload_to_local";
 			$params = array( );
 			break;
+
+       case "drive":
+			$fn = "upload_to_drive";
+			$params = array( );
+			break;
 	}
 
+    $params['date'] = $folder_date;
 	$params['output'] = $output_path;
 	$params['hashes'] = $hash_files;
 	$params['upload'] = array(
