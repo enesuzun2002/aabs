@@ -28,9 +28,9 @@ function upload_to_drive($data) {
 	
 echo "Uploading build and {$hash}sum...\n";
     xexec("mkdir {$date}");
-    xexec("mv {$output} {$date}/{$uploadfile}");
+    xexec("cp {$output} {$date}/{$uploadfile}");
     foreach ($hashes as $hash => $file) {
-    xexec("mv {$file} {$date}/{$uploadfile}.{$hash}sum");
+    xexec("cp {$file} {$date}/{$uploadfile}.{$hash}sum");
     }
     xexec("gdrive upload -r --name {$date} -p {$uploaddir} {$date}");
     xexec("rm -rf {$date}");
