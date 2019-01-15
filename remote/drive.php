@@ -18,7 +18,7 @@
 
 function upload_to_drive($data) {
 
-    $date = $data['date'];
+        $date = $data['date'];
 	$output = $data['output'];
 	$hashes = $data['hashes'];
 	$uploaddir = $data['upload']['dir'];
@@ -26,20 +26,12 @@ function upload_to_drive($data) {
 
 	echo "Set up gdrive application if you haven't already\n";
 	
-/* TODO
- * Find a way to upload the builds with different date to different folders
- */
-echo "Uploading build...\n";
+echo "Uploading build and {$hash}sum...\n";
     xexec("mkdir {$date}");
     xexec("mv {$output} {$date}/{$uploadfile}");
-	xexec("gdrive upload -r --name {$date} -p {$uploaddir} {$date}");
+    foreach ($hashes as $hash => $file) {
+    xexec("mv {$file} {$date}/{$uploadfile}.{$hash}sum");
+    }
+    xexec("gdrive upload -r --name {$date} -p {$uploaddir} {$date}");
     xexec("rm -rf {$date}");
-
-	foreach ($hashes as $hash => $file) {
-		echo "Uploading {$hash}sum...\n";
-        xexec("mkdir {$date}");
-        xexec("mv {$file} {$date}/{$uploadfile}.{$hash}sum");
-		xexec("gdrive upload -r --name {$date} -p {$uploaddir} {$date}");
-        xexec("rm -rf {$date}");
-	}
 }
