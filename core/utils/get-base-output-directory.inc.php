@@ -15,10 +15,11 @@
  * limitations under the License.
  */
 
-define('BUILD_TYPE_BUILD', 1);
-define('BUILD_TYPE_PATCH', 2);
-define('BUILD_TYPE_BOOT', 3);
-define('BUILD_TYPE_RECOVERY', 4);
-
-// minimal version of TWRP recovery
-define('PATCH_MIN_RECOVERY_VERSION', 1529565799);
+function get_base_output_directory($rom, $source_dir) {
+	$common_out_dir = getenv("OUT_DIR_COMMON_BASE");
+	if ($common_out_dir === false) {
+		return "{$source_dir}/out";
+	} else {
+		return "${common_out_dir}/{$rom}";
+	}
+}

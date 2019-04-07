@@ -61,58 +61,11 @@ function build_rom($rom, $lunch_rom) {
 			'match'   => "boot.img",
 			'targets' => "bootimage",
 		),
-	));
-	aabs_patch($rom, array(
-		'silence' => true,
-		'log_indention' => ($rom == "NexusOS" ? "    " : "")
-	), "zerofltexx", "{$lunch_rom}_zerofltexx-ota-*.zip", array(
-		'zerofltexx' => array(
-			'types' => array( "BOOT" ),
-			'aliases' => array(
-				'zeroflte',
-				'zerofltedv',
-				'zerofltektt',
-				'zerofltelgt',
-				'zeroflteskt',
-			)
-		),
-		'zeroltexx' => array(
-			'types' => array( "BOOT" ),
-			'aliases' => array(
-				'zerolte',
-				'zeroltedv',
-				'zeroltektt',
-				'zeroltelgt',
-				'zerolteskt',
-			)
-		),
-		'zerofltecan' => array(
-			'types' => array( "BOOT" ),
-			'aliases' => array(
-				'zerofltebmc',
-				'zerofltetmo',
-				'zeroflteue',
-				'zerofltemtr',
-			)
-		),
-		'zeroltecan' => array(
-			'types' => array( "BOOT" ),
-			'aliases' => array(
-				'zeroltebmc',
-				'zeroltetmo',
-			)
-		),
-	));
-
-	/*
-	 * G92[0/5]P (and maybe more...)
-	 */
-	aabs_build($rom, $lunch_rom, 'userdebug', array(
 		'zerofltespr' => array(
-			'clean'   => array( "{$lunch_rom}_zerofltespr-ota-*.zip" ),
+			'clean'   => array( "boot.img" ),
 			'clobber' => false,
-			'match'   => "{$lunch_rom}_zerofltespr-ota-*.zip",
-			'targets' => "otapackage",
+			'match'   => "boot.img",
+			'targets' => "bootimage",
 		),
 		'zeroltespr' => array(
 			'clean'   => array( "boot.img" ),
@@ -121,49 +74,81 @@ function build_rom($rom, $lunch_rom) {
 			'targets' => "bootimage",
 		),
 	));
+
 	aabs_patch($rom, array(
-		'silence' => true,
-		'log_indention' => ($rom == "NexusOS" ? "    " : "")
-	), "zerofltespr", "{$lunch_rom}_zerofltespr-ota-*.zip", array(
+		'silence' => false,
+		'log_indention' => ($rom == "NexusOS" ? "     " : "")
+	), "zerofltexx", "{$lunch_rom}_zerofltexx-ota-*.zip", array(
+		'zerofltexx' => array(
+			'types' => array( "BOOT" ),
+			'models' => array(
+				'G920F' => "zerofltexx",
+				'G920I' => "zerofltedv",
+				'G920S' => "zeroflteskt",
+				'G920K' => "zerofltektt",
+				'G920L' => "zerofltelgt",
+			)
+		),
+		'zeroltexx' => array(
+			'types' => array( "BOOT" ),
+			'models' => array(
+				'G925F' => "zeroltexx",
+				'G925I' => "zeroltedv",
+				'G925S' => "zerolteskt",
+				'G925K' => "zeroltektt",
+				'G925L' => "zeroltelgt",
+			)
+		),
+		'zerofltecan' => array(
+			'types' => array( "BOOT" ),
+			'models' => array(
+				'G920T1' => "zerofltemtr",
+				'G920T' => "zerofltetmo",
+				'G920W8' => "zerofltebmc",
+			)
+		),
+		'zeroltecan' => array(
+			'types' => array( "BOOT" ),
+			'models' => array(
+				'G925T1' => "zeroltemtr",
+				'G925T' => "zeroltetmo",
+				'G925W8' => "zeroltebmc",
+			)
+		),
 		'zerofltespr' => array(
 			'types' => array( "BOOT" ),
-			'aliases' => array(
-				'zeroflteacg',
-				'zerofltechn',
-				'zerofltectc',
-				'zeroflteusc',
-				'zerofltezc',
-				'zerofltezh',
-				'zerofltezm',
-				'zerofltezt',
+			'models' => array(
+				'G9200'  => "zerofltezc",
+				'G9208'  => "zerofltezm",
+				'G9209'  => "zerofltectc",
+				'G920P'  => "zerofltespr",
+				'G920R4' => "zeroflteusc",
+				'G920R7' => "zeroflteacg",
+				'G920V'  => "zerofltevzw", // confirm this requires SPR
 			)
 		),
 		'zeroltespr' => array(
 			'types' => array( "BOOT" ),
-			'aliases' => array(
-				'zerolteacg',
-				'zeroltechn',
-				'zerolteusc',
-				'zeroltezc',
-				'zeroltezt',
+			'models' => array(
+				'G9250'  => "zeroltezc",
+				'G9258'  => "zeroltezm",
+				'G9259'  => "zeroltectc",
+				'G925P'  => "zeroltespr",
+				'G925R4' => "zerolteusc",
+				'G925R7' => "zerolteacg",
+				'G925V'  => "zeroltevzw", // confirm this requires SPR
 			)
 		),
 	));
 
 	aabs_upload_multi($rom, "zero", array( 'jobs' => 4 ), array(
-		// G92[0/5]F/I/S/K/L
+		// G92[0/5]F/I/S/K/L/P
 		'zerofltexx' => array(
 			'match' => "{$lunch_rom}_zerofltexx-ota-*.zip",
 			'type'  => BUILD_TYPE_BUILD,
 			'var-overrides' => array(
 				'device' => "zero-multitarget",
 			),
-		),
-
-		// G92[0/5]P (and maybe more...)
-		'zerofltespr' => array(
-			'match' => "{$lunch_rom}_zerofltespr-ota-*.zip",
-			'type'  => BUILD_TYPE_BUILD,
 		),
 	));
 }
